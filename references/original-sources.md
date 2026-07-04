@@ -1,21 +1,14 @@
 # Original Sources
 
-This repository is a standalone packaging of the Liuyao deterministic charting layer extracted from local Orbit and OrbitAgent checkouts.
+This repository is a standalone packaging of the Liuyao deterministic charting layer extracted from the public OrbitAgent repository.
 
 ## Source Repositories
-
-Main project:
-
-- Repository: `https://github.com/erwinmsmith/Orbit`
-- Local path at extraction time: `/Users/erwin/Downloads/codespace/Orbit`
-- Commit at extraction time: `8dbd5f3f22fdff22d618ae56fefa039568d2ba14`
-- Embedded skill path: `skills/liuyao-charting`
-
-Source service:
 
 - Repository: `https://github.com/erwinmsmith/OrbitAgent`
 - Local path at extraction time: `/Users/erwin/Downloads/codespace/Orbit/OrbitAgent`
 - Commit at extraction time: `6e9d2093a3e5d8ce15a9b56f6e0d3fa027b40191`
+- Embedded skill path: `skills/liuyao-charting`
+- First OrbitAgent commit containing the mirrored skill: `cb0bf1f`
 - Note at extraction time: local checkout had an unrelated modified `package-lock.json`
 
 ## Migrated Runtime Boundary
@@ -68,4 +61,3 @@ The bundled 64-gua data file was copied from:
 ## Licensing Note
 
 At extraction time, `OrbitAgent/package.json` declared `"license": "MIT"`. No repository-level `LICENSE` file was present in the local Orbit or OrbitAgent checkout. This standalone repository includes an MIT license for the extracted/ported skill package.
-

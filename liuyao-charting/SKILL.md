@@ -14,6 +14,7 @@ The skill covers:
 - 起卦 inputs: explicit `yaoValues`, static `bits`, 3-coin throws, random coins, three-number casting, Gregorian time-style casting, and one-character casting.
 - 排盘 decorations: 本卦/变卦, 动爻, 宫位, 世应, 纳甲, 六亲, 六神, 旬空, 日/月关系, 旺衰 tags, 十二长生, 伏神/飞神, transformation tags, and basic 用神 candidates.
 - Structured output for later reading or reporting.
+- Agent profiles for Codex, Claude Code, OpenClaw, Hermes, and generic tool-using agents under `agents/`.
 
 It does not perform LLM interpretation, RAG retrieval, user/session persistence, API calls, or exact Gregorian-to-干支 calendar conversion.
 
@@ -45,6 +46,7 @@ python3 skills/liuyao-charting/scripts/liuyao_chart.py --character 财 --datetim
 ```
 
 For detailed input/output rules, read `references/workflow.md`.
+For non-Codex agent integration, read `references/agent-support.md` and the matching profile under `agents/`.
 
 ## Boundaries
 
