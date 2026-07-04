@@ -4,6 +4,12 @@
 
 它把 Orbit / OrbitAgent 里“排盘、装卦、纳甲、六亲、六神、旬空、旺衰、伏神、用神候选”等确定性部分抽出来，做成一个不依赖原仓库、不启动服务、不调用 LLM 的独立 skill。
 
+## 关联仓库
+
+- 主项目：`https://github.com/erwinmsmith/Orbit`
+- 源服务：`https://github.com/erwinmsmith/OrbitAgent`
+- 当前独立 skill 仓库：`https://github.com/erwinmsmith/liuyao-charting-skill`
+
 ## 能做什么
 
 - 支持六个爻值、静态阴阳 bits、三枚硬币、随机硬币、三数起卦、时间起卦、字占。
@@ -85,4 +91,3 @@ ORBIT_REPO=/path/to/Orbit ./scripts/sync_to_target.sh
 ```
 
 两个脚本只会替换目标侧的 `liuyao-charting/` skill 文件夹。
-

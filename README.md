@@ -4,6 +4,12 @@ Standalone Codex skill for deterministic Liuyao charting.
 
 This repository packages the charting-only part of the Orbit / OrbitAgent Liuyao implementation as a reusable skill. It does not require cloning OrbitAgent, starting services, connecting to MongoDB or Redis, or calling an LLM.
 
+## Related Repositories
+
+- Main project: `https://github.com/erwinmsmith/Orbit`
+- Source service: `https://github.com/erwinmsmith/OrbitAgent`
+- This standalone skill repo: `https://github.com/erwinmsmith/liuyao-charting-skill`
+
 ## What It Does
 
 - Accepts explicit six yao values, static yin/yang bits, 3-coin throws, random coins, three-number casting, Gregorian time-style casting, and one-character casting.
@@ -85,4 +91,3 @@ ORBIT_REPO=/path/to/Orbit ./scripts/sync_to_target.sh
 ```
 
 Both scripts replace only the `liuyao-charting/` skill folder on the destination side.
-
