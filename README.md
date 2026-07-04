@@ -77,6 +77,56 @@ If an agent needs source comparison or regeneration, clone only the public [Orbi
 git clone https://github.com/erwinmsmith/OrbitAgent.git
 ```
 
+## Install And Use In Agents
+
+The portable installation pattern is:
+
+1. Clone this standalone skill repository.
+2. Point your agent at the `liuyao-charting/` folder.
+3. Add the matching profile from `liuyao-charting/agents/` to the agent's project instructions, system prompt, custom skill config, or tool description.
+4. Allow the agent to run the local Python command and parse JSON output.
+
+```bash
+git clone https://github.com/erwinmsmith/liuyao-charting-skill.git
+cd liuyao-charting-skill
+python3 liuyao-charting/scripts/liuyao_chart.py --numbers 11,22,5 --day-stem 丙 --day-branch 午 --month-branch 巳
+```
+
+Codex installation:
+
+```bash
+git clone https://github.com/erwinmsmith/liuyao-charting-skill.git
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R liuyao-charting-skill/liuyao-charting "${CODEX_HOME:-$HOME/.codex}/skills/"
+```
+
+Then start a new Codex session and ask for the skill by name, for example:
+
+```text
+Use $liuyao-charting to create a Liuyao chart from numbers 11,22,5 with day 丙午 and month 巳.
+```
+
+Claude Code installation:
+
+```bash
+git clone https://github.com/erwinmsmith/liuyao-charting-skill.git
+```
+
+Add this to your project `CLAUDE.md` or session instructions:
+
+```text
+Use the Liuyao skill at /absolute/path/to/liuyao-charting-skill/liuyao-charting.
+Read agents/claudecode.md first. Run scripts/liuyao_chart.py for charting and treat JSON output as the source of truth.
+```
+
+OpenClaw, Hermes, or another custom-tool agent:
+
+- Clone [erwinmsmith/liuyao-charting-skill](https://github.com/erwinmsmith/liuyao-charting-skill).
+- Register a shell/Python tool with working directory `liuyao-charting/`.
+- Use command `python3 scripts/liuyao_chart.py`.
+- Load the matching profile: [openclaw.md](liuyao-charting/agents/openclaw.md), [hermes.md](liuyao-charting/agents/hermes.md), or [generic.md](liuyao-charting/agents/generic.md).
+- For interpretation, also load [interpretation-workflow.md](liuyao-charting/references/interpretation-workflow.md), [system-prompt.md](liuyao-charting/prompts/system-prompt.md), [report-template.md](liuyao-charting/prompts/report-template.md), and [few-shots.md](liuyao-charting/prompts/few-shots.md).
+
 ## Multi-Agent Support
 
 This skill is runtime-neutral. Any agent that can read files and run a local Python command can use the same charting interface:
@@ -103,14 +153,6 @@ For interpretation, agents should read:
 - [system-prompt.md](liuyao-charting/prompts/system-prompt.md)
 - [report-template.md](liuyao-charting/prompts/report-template.md)
 - [few-shots.md](liuyao-charting/prompts/few-shots.md)
-
-## Install As A Codex Skill
-
-Copy or symlink the skill folder into your Codex skills directory:
-
-```bash
-cp -R ./liuyao-charting "${CODEX_HOME:-$HOME/.codex}/skills/"
-```
 
 ## Source Project
 

@@ -77,6 +77,56 @@ python3 /path/to/skill-creator/scripts/quick_validate.py ./liuyao-charting
 git clone https://github.com/erwinmsmith/OrbitAgent.git
 ```
 
+## 在 Agent 中安装和使用
+
+通用安装方式：
+
+1. clone 当前独立 skill 仓库。
+2. 让 agent 能读取 `liuyao-charting/` 文件夹。
+3. 把 `liuyao-charting/agents/` 里对应的 profile 放进该 agent 的项目指令、system prompt、自定义 skill 配置或 tool 描述里。
+4. 允许 agent 执行本地 Python 命令，并把 JSON 输出当作唯一排盘事实来源。
+
+```bash
+git clone https://github.com/erwinmsmith/liuyao-charting-skill.git
+cd liuyao-charting-skill
+python3 liuyao-charting/scripts/liuyao_chart.py --numbers 11,22,5 --day-stem 丙 --day-branch 午 --month-branch 巳
+```
+
+Codex 安装：
+
+```bash
+git clone https://github.com/erwinmsmith/liuyao-charting-skill.git
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R liuyao-charting-skill/liuyao-charting "${CODEX_HOME:-$HOME/.codex}/skills/"
+```
+
+然后开启新的 Codex 会话，用 skill 名称调用，例如：
+
+```text
+Use $liuyao-charting to create a Liuyao chart from numbers 11,22,5 with day 丙午 and month 巳.
+```
+
+Claude Code 安装：
+
+```bash
+git clone https://github.com/erwinmsmith/liuyao-charting-skill.git
+```
+
+在项目 `CLAUDE.md` 或当前会话指令里加入：
+
+```text
+Use the Liuyao skill at /absolute/path/to/liuyao-charting-skill/liuyao-charting.
+Read agents/claudecode.md first. Run scripts/liuyao_chart.py for charting and treat JSON output as the source of truth.
+```
+
+OpenClaw、Hermes 或其他自定义 tool agent：
+
+- clone [erwinmsmith/liuyao-charting-skill](https://github.com/erwinmsmith/liuyao-charting-skill)。
+- 注册一个 shell/Python tool，工作目录设为 `liuyao-charting/`。
+- tool 命令使用 `python3 scripts/liuyao_chart.py`。
+- 加载对应 profile：[openclaw.md](liuyao-charting/agents/openclaw.md)、[hermes.md](liuyao-charting/agents/hermes.md) 或 [generic.md](liuyao-charting/agents/generic.md)。
+- 需要解卦时，再加载 [interpretation-workflow.md](liuyao-charting/references/interpretation-workflow.md)、[system-prompt.md](liuyao-charting/prompts/system-prompt.md)、[report-template.md](liuyao-charting/prompts/report-template.md)、[few-shots.md](liuyao-charting/prompts/few-shots.md)。
+
 ## 多 Agent 支持
 
 这个 skill 不绑定具体运行时。任何能读取文件、运行本地 Python 命令并解析 JSON 的 agent 都可以使用同一个排盘接口：
@@ -103,14 +153,6 @@ python3 liuyao-charting/scripts/liuyao_chart.py <casting-input> [time-pillars]
 - [system-prompt.md](liuyao-charting/prompts/system-prompt.md)
 - [report-template.md](liuyao-charting/prompts/report-template.md)
 - [few-shots.md](liuyao-charting/prompts/few-shots.md)
-
-## 安装到 Codex
-
-复制或软链接 `liuyao-charting/` 到 Codex skills 目录：
-
-```bash
-cp -R ./liuyao-charting "${CODEX_HOME:-$HOME/.codex}/skills/"
-```
 
 ## 原仓库信息
 
