@@ -1,8 +1,8 @@
 # Liuyao Charting Skill
 
-Standalone Codex skill for deterministic Liuyao charting.
+Standalone Codex skill for deterministic Liuyao charting and grounded interpretation prompts.
 
-This repository packages the charting-only part of the public OrbitAgent Liuyao implementation as a reusable skill. It does not require cloning OrbitAgent, starting services, connecting to MongoDB or Redis, or calling an LLM.
+This repository packages the charting-focused part of the public OrbitAgent Liuyao implementation as a reusable skill. Charting does not require cloning OrbitAgent, starting services, connecting to MongoDB or Redis, or calling an LLM. Optional interpretation workflow prompts and few-shots are bundled for agents that need to write grounded narrative readings.
 
 ## Related Repositories
 
@@ -14,6 +14,7 @@ This repository packages the charting-only part of the public OrbitAgent Liuyao 
 - Accepts explicit six yao values, static yin/yang bits, 3-coin throws, random coins, three-number casting, Gregorian time-style casting, and one-character casting.
 - Produces structured JSON with original and changed hexagrams, moving lines, palace and shi/ying, NaJia, six relatives, six gods, xunkong, strength tags, twelve stages, fushen, transformations, branch relations, and basic yongshen candidates.
 - Bundles the 64-gua data needed by the charting script.
+- Bundles interpretation workflow guidance, a reusable system prompt, a structured report template, and few-shot response patterns.
 - Includes agent profiles for Codex, Claude Code, OpenClaw, Hermes, and generic shell-capable agents.
 
 ## Repository Layout
@@ -30,8 +31,20 @@ liuyao-charting-skill/
 │   └── original-sources.md
 └── liuyao-charting/
     ├── SKILL.md
+    ├── prompts/
+    │   ├── system-prompt.md
+    │   ├── report-template.md
+    │   └── few-shots.md
     ├── references/
-    │   └── workflow.md
+    │   ├── workflow.md
+    │   ├── interpretation-workflow.md
+    │   └── agent-support.md
+    ├── agents/
+    │   ├── codex.md
+    │   ├── claudecode.md
+    │   ├── openclaw.md
+    │   ├── hermes.md
+    │   └── generic.md
     └── scripts/
         ├── liuyao_chart.py
         └── data/
@@ -75,6 +88,13 @@ Profiles are bundled in `liuyao-charting/agents/`:
 
 All profiles use the same stable interface: run `python3 liuyao-charting/scripts/liuyao_chart.py` and treat the JSON output as the source of truth.
 
+For interpretation, agents should read:
+
+- `liuyao-charting/references/interpretation-workflow.md`
+- `liuyao-charting/prompts/system-prompt.md`
+- `liuyao-charting/prompts/report-template.md`
+- `liuyao-charting/prompts/few-shots.md`
+
 ## Install As A Codex Skill
 
 Copy or symlink the skill folder into your Codex skills directory:
@@ -91,7 +111,7 @@ This standalone skill was extracted from the public OrbitAgent Liuyao determinis
 - Embedded skill path in OrbitAgent: `skills/liuyao-charting`
 - Detailed provenance: `references/original-sources.md`
 
-The standalone Python script is a port of the deterministic TypeScript charting rules. It intentionally excludes OrbitAgent runtime systems such as agents, RAG, LLM adapters, persistence, API routes, auth, MongoDB, and Redis.
+The standalone Python script is a port of the deterministic TypeScript charting rules. The prompt resources are portable summaries of OrbitAgent's analysis/report workflow. This package intentionally excludes OrbitAgent runtime systems such as live agent orchestration, RAG indices, LLM adapters, persistence, API routes, auth, MongoDB, and Redis.
 
 ## Sync With OrbitAgent
 

@@ -23,12 +23,13 @@ Included:
 - Twelve stages.
 - Fushen and transformations.
 - Rule-based yongshen candidate selection.
+- Portable interpretation workflow, prompt skeletons, report template, and few-shot response patterns derived from OrbitAgent's Liuyao analysis/report pipeline.
 
 Excluded:
 
 - OrbitAgent app server.
-- Agent definitions and workflows.
-- LLM providers, prompts, RAG, and model calls.
+- Live OrbitAgent agent orchestration and workflows.
+- LLM providers, RAG indices, and model calls.
 - MongoDB, Redis, auth, API routes, user/session state, billing, and UI code.
 - Exact Gregorian-to-ganzhi calendar conversion from `lunar-typescript`; this standalone skill accepts manually supplied pillars instead.
 
@@ -52,6 +53,10 @@ The Python script `liuyao-charting/scripts/liuyao_chart.py` was ported from thes
 - `OrbitAgent/src/liuyao/skills/branchRelationSkill.ts`
 - `OrbitAgent/src/liuyao/skills/yongshenSkill.ts`
 - `OrbitAgent/src/liuyao/agent/questionClassifier.ts`
+- `OrbitAgent/src/liuyao/agent/analysisAgent.ts`
+- `OrbitAgent/src/liuyao/agent/reportTemplate.ts`
+- `OrbitAgent/src/liuyao/agent/chartBrief.ts`
+- `OrbitAgent/prompts/system/liuyao-agent.yaml`
 - `OrbitAgent/src/liuyao/constants/*.ts`
 
 The bundled 64-gua data file was copied from:
